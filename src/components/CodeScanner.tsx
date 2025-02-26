@@ -2,7 +2,7 @@
 import { useEffect, useState } from "react"
 import { Button, View, Text, Vibration, StyleSheet, StatusBar, SafeAreaView, TouchableOpacity, Image, Dimensions } from 'react-native';
 
-import { BarCodeScanner } from "expo-barcode-scanner";
+import { Camera, CameraView } from 'expo-camera';
 import { useToast } from 'react-native-toast-notifications';
 import Svg, { G, Path, Rect, Defs, Circle, Mask } from "react-native-svg";
 
@@ -38,7 +38,7 @@ export const CodeScanner = () => {
     const height = `${HEIGHT * .4}`;
 
     const askForCamPermission = async () => {
-        const { status } = await BarCodeScanner.requestPermissionsAsync();
+        const { status } = await Camera.requestCameraPermissionsAsync();
         setHasPermission(status === 'granted');
     }
 
@@ -114,9 +114,9 @@ export const CodeScanner = () => {
             <SafeAreaView
                 style={{flex: 1,}}
             />
-            <BarCodeScanner
+            <CameraView
                 style={styles.container}
-                onBarCodeScanned={scanned ? undefined : handleScan}
+                onBarcodeScanned={scanned ? undefined : handleScan}
             />
             <Svg width="100%" height="100%">
                     {/*Mascará del Scanner*/}
@@ -189,10 +189,9 @@ export const CodeScanner = () => {
 const styles = StyleSheet.create({
     container: {
         height: '100%',
-        width: '200%',
+        width: '100%',
         alignSelf: 'center',
         flex: 1,
-        zIndex: -1,
         position: 'absolute',
     },
     floatingMenuContainer: {

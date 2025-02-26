@@ -17,7 +17,7 @@ import { Tittle } from '../components/Tittle';
 import { useUploadStudents } from '../hooks/useUploadStudents';
 
 export const MainScreen = () => {
-    const [isSheetAdded, setIsSheetAdded] = useState(false);
+    const [isSheetAdded, setIsSheetAdded] = useState(true);
     const {uploadStudents} = useUploadStudents();
     const handleUpload = () => {
         uploadStudents();
@@ -45,10 +45,6 @@ export const MainScreen = () => {
                                 <Tittle />
                                 <SpreadsheetSelector />
                                 <NavBar onPress = {()=> setIsSheetAdded(false)} onPressAdd={handleUpload} onPressExit={BackHandler.exitApp}/>
-                                {/* <NavBar onPress = {()=> setIsSheetAdded(false)}/> */}
-                                {/* <View style={styles.buttonContainer}>
-                                    <Button title="Regresar al Inicio" onPress={() => setIsSheetAdded(false)} color="#001C99" />
-                                </View> */}
                             </>)
                     }
                     <StatusBar style="auto" />
